@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "question": "How to return all answers for the task on codewars?",
+    "answers": [
+      { "text": "Return test answer", "isCorrect": true },
+      { "text": "Do the task", "isCorrect": false },
+      { "text": "Ask google", "isCorrect": false },
+      { "text": "It's impossible", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "In which Lviv district live ded?",
+    "answers": [
+      { "text": "With Misha", "isCorrect": true },
+      { "text": "Suhivskiy", "isCorrect": false },
+      { "text": "Near horse", "isCorrect": false },
+      { "text": "In Lviv subway", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Count of people who want to punch Valera in his face?",
+    "answers": [
+      { "text": "6", "isCorrect": true },
+      { "text": "PI", "isCorrect": false },
+      { "text": "Math.round(Math.random() * 10)", "isCorrect": false },
+      { "text": "null", "isCorrect": false }
+    ]
+  },{
+    "id": 4,
+    "question": "Who love css?",
+    "answer": "Oleg",
+    "answers": [
+      { "text": "Oleg", "isCorrect": true },
+      { "text": "Everyone", "isCorrect": false },
+      { "text": "Rules", "isCorrect": false },
+      { "text": "IDK", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "How to make this function sum(1, 2) which return 3",
+    "answers": [
+      { "text": "Return test answer", "isCorrect": false },
+      { "text": "return a + b", "isCorrect": false },
+      { "text": "Register on codewars", "isCorrect": true },
+      { "text": "Impossible", "isCorrect": false }
+    ]
+  }
+]
