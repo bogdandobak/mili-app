@@ -1,23 +1,19 @@
 <template>
   <section class="flex flex-col items-center">
-    <div v-if="!isGameOver">
+    <div v-if="!isGameOver && !isWinner">
       <h2 class="text-center font-semibold text-md">
         {{ questionsData[currentQuestionIndex].question }}
       </h2>
-      <button @click="handleHint">
-        50 / 50
-      </button>
-      <a
-        :href="`https://www.google.com/search?q=${questionsData[currentQuestionIndex].question}`"
-        target="_blank"
-        @click="handleHint"
-      >
-        Search in google
-      </a>
+      <Hints
+        :searchTimes="searchCanUseTimes"
+        :halfTimes="halfCanUseTimes"
+        :questionsText="questionsData[currentQuestionIndex].question"
+        @handle-hint="handleHint"
+      />
       <div class="flex w-full justify-center p-10">
         <ul>
           <li
-            v-for="item in questionsData[currentQuestionIndex].answers"
+            v-for="item in answers"
             :key="item.text"
             class="m-2 w-72 border-2 rounded-md hover:bg-purple-400 transition-colors duration-1000"
             :class="item.isCorrect ? correctAnswerBorder : correctAnswerBorder && falseAnswerBorder"
@@ -29,6 +25,10 @@
       </div>
     </div>
     <LoseGame
+      v-else-if="isGameOver && !isWinner"
+      @handle-restart="handleRestart"
+    />
+    <WinGame
       v-else
       @handle-restart="handleRestart"
     />
@@ -39,12 +39,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, ref } from 'vue'
 import LoseGame from '@/components/LoseGame.vue'
+import WinGame from '@/components/WinGame.vue'
+import Hints from '@/components/Hints.vue'
 import questions from '@/data/questions.json'
 import { IQuestion } from '@/modules/IQuestion'
+import { IAnswer } from '@/modules/IAnswer'
 
 export default defineComponent({
+  name: 'Quiz',
   components: {
-    LoseGame
+    LoseGame,
+    Hints,
+    WinGame
   },
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
@@ -53,8 +59,14 @@ export default defineComponent({
     const correctAnswerBorder = ref('')
     const falseAnswerBorder = ref('')
     const savedAnswers = ref<IQuestion[]>([])
-    const searchCanUseTimes = ref(2)
-    const halfCanUseTimes = ref(2)
+    const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 2)
+    const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 2)
+    const isWinner = ref(false)
+    const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
+
+    function handleWin () {
+      isWinner.value = true
+    }
 
     function saveAsnwer () {
       savedAnswers.value.push(questionsData.value[currentQuestionIndex.value])
@@ -71,7 +83,11 @@ export default defineComponent({
           localStorage.setItem('index', JSON.stringify(currentQuestionIndex.value + 1))
           currentQuestionIndex.value = +localStorage.getItem('index')!
           correctAnswerBorder.value = ''
+          answers.value = questionsData.value[currentQuestionIndex.value].answers
         }, 1000)
+        if (currentQuestionIndex.value === questionsData.value.length - 1) {
+          handleWin()
+        }
       } else {
         correctAnswerBorder.value = 'border-green-600'
         falseAnswerBorder.value = 'border-red-600'
@@ -84,16 +100,29 @@ export default defineComponent({
     }
 
     function handleHint (type: string) {
-      if (type === 'google') {
-        searchCanUseTimes.value -= 1
-      } else {
-        halfCanUseTimes.value -= 1
+      const secondAnswer = answers.value.filter(item => !item.isCorrect)
+      switch (type) {
+        case 'search':
+          localStorage.setItem('hintSearch', JSON.stringify(searchCanUseTimes.value - 1))
+          searchCanUseTimes.value = +localStorage.getItem('hintSearch')!
+          break
+        case 'half':
+          localStorage.setItem('hintHalf', JSON.stringify(halfCanUseTimes.value - 1))
+          halfCanUseTimes.value = +localStorage.getItem('hintHalf')!
+          answers.value = answers.value.filter(item => item.isCorrect)
+          answers.value.push(secondAnswer[0])
+          break
+        default:
+          break
       }
     }
 
     function handleRestart () {
       currentQuestionIndex.value = 0
+      halfCanUseTimes.value = 2
+      searchCanUseTimes.value = 2
       isGameOver.value = false
+      isWinner.value = false
       localStorage.clear()
     }
 
@@ -105,7 +134,11 @@ export default defineComponent({
       handleRestart,
       correctAnswerBorder,
       falseAnswerBorder,
-      handleHint
+      handleHint,
+      searchCanUseTimes,
+      halfCanUseTimes,
+      isWinner,
+      answers
     }
   }
 })

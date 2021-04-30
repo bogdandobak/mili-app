@@ -12,6 +12,7 @@ import { defineComponent } from 'vue'
 import Quiz from '@/components/Quiz.vue'
 
 export default defineComponent({
+  name: 'App',
   components: {
     Quiz
   }
