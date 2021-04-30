@@ -1,6 +1,7 @@
 {
   "name": "custom-app",
   "version": "0.2.0",
+  "homepage": "https://bogdandobak.github.io/mili",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
