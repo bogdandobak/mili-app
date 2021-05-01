@@ -41,12 +41,110 @@
   },
   {
     "id": 5,
-    "question": "How to make this function sum(1, 2) which return 3",
+    "question": "How to make this function sum(1, 2) which return 3?",
     "answers": [
       { "text": "Return test answer", "isCorrect": false },
       { "text": "return a + b", "isCorrect": false },
       { "text": "Register on codewars", "isCorrect": true },
       { "text": "Impossible", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "What you need to do when you want to order the food?",
+    "answers": [
+      { "text": "Just do it", "isCorrect": false },
+      { "text": "Just wait", "isCorrect": true },
+      { "text": "Order food", "isCorrect": false },
+      { "text": "Don't mind , eat cookies", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Which fantom hero is real?",
+    "answers": [
+      { "text": "Ded", "isCorrect": true },
+      { "text": "Sister", "isCorrect": false },
+      { "text": "Brother", "isCorrect": false },
+      { "text": "What?", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "What mean take a taxi in Striy?",
+    "answers": [
+      { "text": "Smoke some stuff", "isCorrect": true },
+      { "text": "Take a taxi", "isCorrect": false },
+      { "text": "Help ded with garden", "isCorrect": false },
+      { "text": "You can't drink anymore", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "How big all known 'Hole'?",
+    "answers": [
+      { "text": "Like a Earth", "isCorrect": false },
+      { "text": "Like a black hole", "isCorrect": false },
+      { "text": "Like a Vynnyky", "isCorrect": false },
+      { "text": "You can hide in it", "isCorrect": true }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "What color of Valera limousine?",
+    "answers": [
+      { "text": "Black", "isCorrect": false },
+      { "text": "White with hatch", "isCorrect": true },
+      { "text": "White", "isCorrect": false },
+      { "text": "#fff", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Where you can find some examples of code?",
+    "answers": [
+      { "text": "Odnoklasniky", "isCorrect": false },
+      { "text": "Magazine Maxime", "isCorrect": false },
+      { "text": "Codehub", "isCorrect": false },
+      { "text": "StackOverflow", "isCorrect": true }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Who can learn 1 framework per day?",
+    "answers": [
+      { "text": "Ded", "isCorrect": false },
+      { "text": "Misha", "isCorrect": true },
+      { "text": "Nobody from film 'Nobody'", "isCorrect": false },
+      { "text": "Nobody", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "What can repair ded?",
+    "answers": [
+      { "text": "Everything you want", "isCorrect": true },
+      { "text": "Car", "isCorrect": false },
+      { "text": "Toilet", "isCorrect": false },
+      { "text": "Hole", "isCorrect": false }
+    ]
+  },{
+    "id": 14,
+    "question": "How many questions in this quiz?",
+    "answers": [
+      { "text": "5", "isCorrect": false },
+      { "text": "20", "isCorrect": false },
+      { "text": "40", "isCorrect": false },
+      { "text": "15", "isCorrect": true }
+    ]
+  },{
+    "id": 15,
+    "question": "How many calls has Misha per day?",
+    "answers": [
+      { "text": "1-2", "isCorrect": false },
+      { "text": "4", "isCorrect": false },
+      { "text": "Infinity", "isCorrect": true },
+      { "text": "0", "isCorrect": false }
     ]
   }
 ]

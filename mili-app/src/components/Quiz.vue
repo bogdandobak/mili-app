@@ -30,6 +30,7 @@
     />
     <WinGame
       v-else
+      :score="score"
       @handle-restart="handleRestart"
     />
   </section>
@@ -63,6 +64,8 @@ export default defineComponent({
     const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 2)
     const isWinner = ref(false)
     const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
+    const score = ref(+localStorage.getItem('score')! || 0)
+    const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleWin () {
       isWinner.value = true
@@ -73,29 +76,62 @@ export default defineComponent({
       localStorage.setItem('answers', JSON.stringify(savedAnswers))
     }
 
+    function handleScore () {
+      const easyQ = 4
+      const midQ = 9
+      const hardQ = 14
+      if (currentQuestionIndex.value <= easyQ) {
+        localStorage.setItem('score', JSON.stringify(score.value + 1))
+        score.value = +localStorage.getItem('score')!
+      }
+      if (currentQuestionIndex.value > easyQ && currentQuestionIndex.value <= midQ) {
+        localStorage.setItem('score', JSON.stringify(score.value + 3))
+        score.value = +localStorage.getItem('score')!
+      }
+      if (currentQuestionIndex.value > midQ && currentQuestionIndex.value <= hardQ) {
+        localStorage.setItem('score', JSON.stringify(score.value + 5))
+        score.value = +localStorage.getItem('score')!
+      }
+    }
+
+    function switchQuestion () {
+      saveAsnwer()
+      correctAnswerBorder.value = 'border-green-600'
+      setTimeout(() => {
+        localStorage.setItem('index', JSON.stringify(currentQuestionIndex.value + 1))
+        if (+localStorage.getItem('index')! > questionsData.value.length - 1) {
+          handleWin()
+          return
+        }
+        currentQuestionIndex.value = +localStorage.getItem('index')!
+        correctAnswerBorder.value = ''
+        answers.value = questionsData.value[currentQuestionIndex.value].answers
+      }, 1000)
+    }
+
     function handleAnswer (answer: string) {
       const answerData = questionsData.value[currentQuestionIndex.value].answers.find(item => item.text === answer)
 
-      if (answerData?.isCorrect) {
-        saveAsnwer()
-        correctAnswerBorder.value = 'border-green-600'
-        setTimeout(() => {
-          localStorage.setItem('index', JSON.stringify(currentQuestionIndex.value + 1))
-          currentQuestionIndex.value = +localStorage.getItem('index')!
-          correctAnswerBorder.value = ''
-          answers.value = questionsData.value[currentQuestionIndex.value].answers
-        }, 1000)
-        if (currentQuestionIndex.value === questionsData.value.length - 1) {
-          handleWin()
-        }
+      if (+localStorage.getItem('index')! > questionsData.value.length - 1) {
+        return
+      }
+
+      if (answerData?.isCorrect && lifes.value) {
+        switchQuestion()
+        handleScore()
       } else {
+        if (lifes.value === 0) {
+          isGameOver.value = true
+        }
         correctAnswerBorder.value = 'border-green-600'
         falseAnswerBorder.value = 'border-red-600'
+        localStorage.setItem('lifes', JSON.stringify(lifes.value - 1))
+        lifes.value = +localStorage.getItem('lifes')!
         setTimeout(() => {
-          isGameOver.value = true
           falseAnswerBorder.value = ''
           correctAnswerBorder.value = ''
         }, 1000)
+        switchQuestion()
       }
     }
 
@@ -118,12 +154,17 @@ export default defineComponent({
     }
 
     function handleRestart () {
-      currentQuestionIndex.value = 0
-      halfCanUseTimes.value = 2
-      searchCanUseTimes.value = 2
+      lifes.value = 5
+      score.value = 0
+      falseAnswerBorder.value = ''
+      correctAnswerBorder.value = ''
       isGameOver.value = false
       isWinner.value = false
       localStorage.clear()
+      halfCanUseTimes.value = 2
+      searchCanUseTimes.value = 2
+      currentQuestionIndex.value = 0
+      answers.value = questionsData.value[currentQuestionIndex.value].answers
     }
 
     return {
@@ -138,7 +179,8 @@ export default defineComponent({
       searchCanUseTimes,
       halfCanUseTimes,
       isWinner,
-      answers
+      answers,
+      score
     }
   }
 })
