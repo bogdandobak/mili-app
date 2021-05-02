@@ -10,7 +10,7 @@
         :questionsText="questionsData[currentQuestionIndex].question"
         @handle-hint="handleHint"
       />
-      <div class="flex w-full justify-center p-10">
+      <div class="flex w-full justify-center">
         <ul>
           <li
             v-for="item in answers"
@@ -26,6 +26,7 @@
     </div>
     <LoseGame
       v-else-if="isGameOver && !isWinner"
+      :score="score"
       @handle-restart="handleRestart"
     />
     <WinGame
@@ -109,6 +110,20 @@ export default defineComponent({
       }, 1000)
     }
 
+    function handleIncorrectAnswer () {
+      if (lifes.value === 0) {
+        isGameOver.value = true
+      }
+      correctAnswerBorder.value = 'border-green-600'
+      falseAnswerBorder.value = 'border-red-600'
+      localStorage.setItem('lifes', JSON.stringify(lifes.value - 1))
+      lifes.value = +localStorage.getItem('lifes')!
+      setTimeout(() => {
+        falseAnswerBorder.value = ''
+        correctAnswerBorder.value = ''
+      }, 1000)
+    }
+
     function handleAnswer (answer: string) {
       const answerData = questionsData.value[currentQuestionIndex.value].answers.find(item => item.text === answer)
 
@@ -120,17 +135,7 @@ export default defineComponent({
         switchQuestion()
         handleScore()
       } else {
-        if (lifes.value === 0) {
-          isGameOver.value = true
-        }
-        correctAnswerBorder.value = 'border-green-600'
-        falseAnswerBorder.value = 'border-red-600'
-        localStorage.setItem('lifes', JSON.stringify(lifes.value - 1))
-        lifes.value = +localStorage.getItem('lifes')!
-        setTimeout(() => {
-          falseAnswerBorder.value = ''
-          correctAnswerBorder.value = ''
-        }, 1000)
+        handleIncorrectAnswer()
         switchQuestion()
       }
     }
