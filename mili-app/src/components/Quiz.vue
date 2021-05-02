@@ -23,6 +23,7 @@
           </li>
         </ul>
       </div>
+      <p>Lifes {{ lifes }}</p>
     </div>
     <LoseGame
       v-else-if="isGameOver && !isWinner"
@@ -57,12 +58,12 @@ export default defineComponent({
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
     const currentQuestionIndex = ref(+localStorage.getItem('index')! || 0)
-    const isGameOver = ref(false)
     const correctAnswerBorder = ref('')
     const falseAnswerBorder = ref('')
     const savedAnswers = ref<IQuestion[]>([])
     const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 2)
     const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 2)
+    const isGameOver = ref(false)
     const isWinner = ref(false)
     const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
     const score = ref(+localStorage.getItem('score')! || 0)
@@ -77,10 +78,11 @@ export default defineComponent({
       localStorage.setItem('answers', JSON.stringify(savedAnswers))
     }
 
+    const easyQ = 4
+    const midQ = 9
+    const hardQ = 14
+
     function handleScore () {
-      const easyQ = 4
-      const midQ = 9
-      const hardQ = 14
       if (currentQuestionIndex.value <= easyQ) {
         localStorage.setItem('score', JSON.stringify(score.value + 1))
         score.value = +localStorage.getItem('score')!
@@ -141,7 +143,9 @@ export default defineComponent({
     }
 
     function handleHint (type: string) {
-      const secondAnswer = answers.value.filter(item => !item.isCorrect)
+      const randomNumber = Math.round(Math.random() * 10)
+      const randomIndex = randomNumber <= 2 ? randomNumber : 0
+      const uncorrectAnswers = answers.value.filter(item => !item.isCorrect)
       switch (type) {
         case 'search':
           localStorage.setItem('hintSearch', JSON.stringify(searchCanUseTimes.value - 1))
@@ -151,7 +155,7 @@ export default defineComponent({
           localStorage.setItem('hintHalf', JSON.stringify(halfCanUseTimes.value - 1))
           halfCanUseTimes.value = +localStorage.getItem('hintHalf')!
           answers.value = answers.value.filter(item => item.isCorrect)
-          answers.value.push(secondAnswer[0])
+          answers.value.push(uncorrectAnswers[randomIndex])
           break
         default:
           break
@@ -185,7 +189,8 @@ export default defineComponent({
       halfCanUseTimes,
       isWinner,
       answers,
-      score
+      score,
+      lifes
     }
   }
 })
