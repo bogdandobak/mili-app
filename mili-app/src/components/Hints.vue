@@ -3,7 +3,7 @@
     v-if="halfCanUseTimes < 2 || searchCanUseTimes < 2"
     class="flex gap-4 justify-center items-center p-4"
   >
-    <p>Hints:</p>
+    <p class="text-center text-purple-600 font-semibold">Hints:</p>
     <button
       v-if="halfCanUseTimes < 2"
       class="h-10 p-2 bg-purple-500 hover:bg-purple-700 text-white font-bold rounded"
