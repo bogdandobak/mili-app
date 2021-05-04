@@ -2,8 +2,8 @@
   <li
     v-for="item in answers"
     :key="item.text"
-    class="m-2 w-72 border-2 text-purple-500 rounded-md
-          hover:bg-purple-400 hover:text-white transition-colors duration-1000"
+    class="m-2 w-72 border-2 text-white bg-purple-400 rounded-md
+          hover:bg-purple-700 hover:text-white transition-colors duration-1000"
     :class="item.isCorrect ? correctAnswerBorder : correctAnswerBorder && falseAnswerBorder"
     @click="handleAnswer(item.text)"
   >

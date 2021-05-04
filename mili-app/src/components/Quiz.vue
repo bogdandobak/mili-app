@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col items-center m-5">
     <div v-if="!isGameOver && !isWinner">
-      <h2 class="text-center text-purple-600 font-bold">
+      <h2 class="text-center text-white font-bold">
         {{ questionsData[currentQuestionIndex].question }}
       </h2>
       <Hints
@@ -20,13 +20,13 @@
       </div>
       <p
         v-if="lifes"
-        class="text-center text-purple-600 font-semibold"
+        class="text-center text-white font-semibold"
       >
         Lifes {{ lifes }}
       </p>
       <p
         v-else
-        class="text-center text-purple-600 font-semibold animate-pulse"
+        class="text-center text-white font-semibold animate-pulse"
       >
         Last life
       </p>

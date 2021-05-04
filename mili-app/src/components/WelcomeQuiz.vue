@@ -1,12 +1,12 @@
 <template>
-  <h1 class="font-bold text-xl text-purple-700 text-center">
-    Welcome to quiz
+  <h1 class="font-bold text-xl text-white text-center">
+    Welcome to Game
   </h1>
-  <p class="text-center text-purple-600 font-semibold">
-    In this quiz, you will face very hard questions. Good luck
+  <p class="text-center text-white font-semibold">
+    In this game, you will face very hard questions. Good luck
   </p>
   <BaseButton :handleButton="handleStart">
-    Start quiz
+    Start game
   </BaseButton>
 </template>
 

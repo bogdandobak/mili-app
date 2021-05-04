@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col gap-4 items-center">
-    <h2 class="text-center text-purple-600 font-semibold">
+    <h2 class="text-center text-white font-semibold">
       You lose the game
     </h2>
-    <p class="text-center text-purple-600 font-semibold">Your score: {{ score }}</p>
+    <p class="text-center text-white font-semibold">Your score: {{ score }}</p>
     <BaseButton :handleButton="handleRestart">
-      Restart quiz
+      Restart game
     </BaseButton>
   </div>
 </template>

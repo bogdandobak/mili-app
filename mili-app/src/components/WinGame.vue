@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col item-center gap-4">
-    <h2 class="text-center text-purple-600 font-semibold">You win the game</h2>
-    <p class="text-center text-purple-600 font-semibold">Your score: {{ score }}</p>
+    <h2 class="text-center text-white font-semibold">You win the game</h2>
+    <p class="text-center text-white font-semibold">Your score: {{ score }}</p>
     <BaseButton :handleButton="handleRestart">
       Try again
     </BaseButton>
