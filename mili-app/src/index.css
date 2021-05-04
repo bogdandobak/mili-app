@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: no-repeat url(https://images.ctfassets.net/m9t8fn3f4fre/7v43aGpsOfzA66mrYuVF7p/c54d9539867641af33ac7f864b2e0d78/Background_BaseGame_1280x720__1_.png);
+  background: no-repeat url('./images/background.webp');
   background-size: cover;
   background-position: center;
   height: 100vh;
