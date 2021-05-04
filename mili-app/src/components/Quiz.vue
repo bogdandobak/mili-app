@@ -5,10 +5,8 @@
         {{ questionsData[currentQuestionIndex].question }}
       </h2>
       <Hints
-        :searchTimes="searchCanUseTimes"
-        :halfTimes="halfCanUseTimes"
         :questionsText="questionsData[currentQuestionIndex].question"
-        @handle-hint="handleHint"
+        @handle-hint-half="handleHintHalf"
       />
       <div class="flex w-full justify-center">
         <ul>
@@ -61,16 +59,16 @@ export default defineComponent({
     const correctAnswerBorder = ref('')
     const falseAnswerBorder = ref('')
     const savedAnswers = ref<IQuestion[]>([])
-    const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 2)
-    const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 2)
-    const isGameOver = ref(false)
-    const isWinner = ref(false)
+    const isGameOver = ref(localStorage.getItem('isGameOver')! || false)
+    const isWinner = ref(localStorage.getItem('isWinner') || false)
     const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
     const score = ref(+localStorage.getItem('score')! || 0)
     const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleWin () {
-      isWinner.value = true
+      localStorage.setItem('isWinner', JSON.stringify(true))
+      isWinner.value = JSON.parse(localStorage.getItem('isWinner')!)
+      localStorage.setItem('index', JSON.stringify(0))
     }
 
     function saveAsnwer () {
@@ -113,8 +111,9 @@ export default defineComponent({
     }
 
     function handleIncorrectAnswer () {
-      if (lifes.value === 0) {
-        isGameOver.value = true
+      if (!lifes.value) {
+        localStorage.setItem('isGameOver', JSON.stringify(true))
+        isGameOver.value = JSON.parse(localStorage.getItem('isGameOver')!)
       }
       correctAnswerBorder.value = 'border-green-600'
       falseAnswerBorder.value = 'border-red-600'
@@ -142,24 +141,12 @@ export default defineComponent({
       }
     }
 
-    function handleHint (type: string) {
+    function handleHintHalf () {
       const randomNumber = Math.round(Math.random() * 10)
       const randomIndex = randomNumber <= 2 ? randomNumber : 0
       const uncorrectAnswers = answers.value.filter(item => !item.isCorrect)
-      switch (type) {
-        case 'search':
-          localStorage.setItem('hintSearch', JSON.stringify(searchCanUseTimes.value - 1))
-          searchCanUseTimes.value = +localStorage.getItem('hintSearch')!
-          break
-        case 'half':
-          localStorage.setItem('hintHalf', JSON.stringify(halfCanUseTimes.value - 1))
-          halfCanUseTimes.value = +localStorage.getItem('hintHalf')!
-          answers.value = answers.value.filter(item => item.isCorrect)
-          answers.value.push(uncorrectAnswers[randomIndex])
-          break
-        default:
-          break
-      }
+      answers.value = answers.value.filter(item => item.isCorrect)
+      answers.value.push(uncorrectAnswers[randomIndex])
     }
 
     function handleRestart () {
@@ -170,8 +157,6 @@ export default defineComponent({
       isGameOver.value = false
       isWinner.value = false
       localStorage.clear()
-      halfCanUseTimes.value = 2
-      searchCanUseTimes.value = 2
       currentQuestionIndex.value = 0
       answers.value = questionsData.value[currentQuestionIndex.value].answers
     }
@@ -184,9 +169,7 @@ export default defineComponent({
       handleRestart,
       correctAnswerBorder,
       falseAnswerBorder,
-      handleHint,
-      searchCanUseTimes,
-      halfCanUseTimes,
+      handleHintHalf,
       isWinner,
       answers,
       score,

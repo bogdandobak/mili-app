@@ -1,15 +1,15 @@
 <template>
-  <div class="flex gap-4 justify-center items-center p-4">
+  <div v-if="halfCanUseTimes < 2 || searchCanUseTimes < 2" class="flex gap-4 justify-center items-center p-4">
     <p>Hints:</p>
     <button
-      v-if="halfTimes > 0"
+      v-if="halfCanUseTimes < 2"
       class="h-10 p-2 bg-purple-500 hover:bg-purple-700 text-white font-bold rounded"
       @click="handleHint('half')"
     >
       50 / 50
     </button>
     <a
-      v-if="searchTimes > 0"
+      v-if="searchCanUseTimes < 2"
       class="h-10 p-2 bg-purple-500 hover:bg-purple-700 text-white font-bold rounded"
       :href="`https://www.google.com/search?q=${questionsText}`"
       target="_blank"
@@ -21,31 +21,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { EHints } from '@/modules/EHints'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 export default defineComponent({
   props: {
     questionsText: {
       type: String,
       required: true
-    },
-    halfTimes: {
-      type: Number,
-      required: true
-    },
-    searchTimes: {
-      type: Number,
-      required: true
     }
   },
-  emits: ['handle-hint'],
+  emits: ['handle-hint-half'],
   setup (_, { emit }) {
+    const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 0)
+    const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 0)
+
     function handleHint (type: string) {
-      emit('handle-hint', type)
+      switch (type) {
+        case EHints.Search:
+          localStorage.setItem('hintSearch', JSON.stringify(searchCanUseTimes.value + 1))
+          searchCanUseTimes.value = +localStorage.getItem('hintSearch')!
+          break
+        case EHints.Half:
+          localStorage.setItem('hintHalf', JSON.stringify(halfCanUseTimes.value + 1))
+          halfCanUseTimes.value = +localStorage.getItem('hintHalf')!
+          emit('handle-hint-half')
+          break
+        default:
+          break
+      }
     }
 
     return {
-      handleHint
+      handleHint,
+      halfCanUseTimes,
+      searchCanUseTimes
     }
   }
 })
