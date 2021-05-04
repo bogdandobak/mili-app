@@ -1,7 +1,7 @@
 <template>
-  <section class="flex flex-col items-center">
+  <section class="flex flex-col items-center m-5">
     <div v-if="!isGameOver && !isWinner">
-      <h2 class="text-center font-semibold text-md">
+      <h2 class="text-center text-purple-600 font-bold">
         {{ questionsData[currentQuestionIndex].question }}
       </h2>
       <Hints
@@ -10,15 +10,12 @@
       />
       <div class="flex w-full justify-center">
         <ul>
-          <li
-            v-for="item in answers"
-            :key="item.text"
-            class="m-2 w-72 border-2 rounded-md hover:bg-purple-400 transition-colors duration-1000"
-            :class="item.isCorrect ? correctAnswerBorder : correctAnswerBorder && falseAnswerBorder"
-            @click="handleAnswer(item.text)"
-          >
-            {{ item.text }}
-          </li>
+          <QuizItem
+            :answers="answers"
+            :correctAnswerBorder="correctAnswerBorder"
+            :falseAnswerBorder="falseAnswerBorder"
+            @handle-answer="handleAnswer"
+          />
         </ul>
       </div>
       <p
@@ -50,10 +47,14 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, ref } from 'vue'
+
+import QuizItem from '@/components/QuizItem.vue'
 import LoseGame from '@/components/LoseGame.vue'
 import WinGame from '@/components/WinGame.vue'
 import Hints from '@/components/Hints.vue'
+
 import questions from '@/data/questions.json'
+
 import { IQuestion } from '@/modules/IQuestion'
 import { IAnswer } from '@/modules/IAnswer'
 
@@ -62,7 +63,8 @@ export default defineComponent({
   components: {
     LoseGame,
     Hints,
-    WinGame
+    WinGame,
+    QuizItem
   },
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
@@ -170,6 +172,7 @@ export default defineComponent({
       localStorage.clear()
       currentQuestionIndex.value = 0
       answers.value = questionsData.value[currentQuestionIndex.value].answers
+      localStorage.setItem('isGameStarted', JSON.stringify(true))
     }
 
     return {

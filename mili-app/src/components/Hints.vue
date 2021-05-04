@@ -1,5 +1,8 @@
 <template>
-  <div v-if="halfCanUseTimes < 2 || searchCanUseTimes < 2" class="flex gap-4 justify-center items-center p-4">
+  <div
+    v-if="halfCanUseTimes < 2 || searchCanUseTimes < 2"
+    class="flex gap-4 justify-center items-center p-4"
+  >
     <p>Hints:</p>
     <button
       v-if="halfCanUseTimes < 2"
@@ -21,9 +24,9 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, ref } from 'vue'
 import { EHints } from '@/modules/EHints'
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 export default defineComponent({
   props: {
@@ -36,7 +39,6 @@ export default defineComponent({
   setup (_, { emit }) {
     const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 0)
     const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 0)
-
     function handleHint (type: string) {
       switch (type) {
         case EHints.Search:
@@ -52,7 +54,6 @@ export default defineComponent({
           break
       }
     }
-
     return {
       handleHint,
       halfCanUseTimes,

@@ -4,12 +4,9 @@
       You lose the game
     </h2>
     <p class="text-center text-purple-600 font-semibold">Your score: {{ score }}</p>
-    <button
-      class="bg-purple-500 hover:bg-purple-700 text-white font-bold p-3 rounded w-32"
-      @click="handleRestart"
-    >
+    <BaseButton :handleButton="handleRestart">
       Restart quiz
-    </button>
+    </BaseButton>
   </div>
 </template>
 
