@@ -16,6 +16,7 @@
       class="h-10 p-2 bg-purple-500 hover:bg-purple-700 text-white font-bold rounded"
       :href="`https://www.google.com/search?q=${questionsText}`"
       target="_blank"
+      rel="noopener"
       @click="handleHint('search')"
     >
       Search in google
