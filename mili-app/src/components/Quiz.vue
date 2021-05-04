@@ -69,20 +69,15 @@ export default defineComponent({
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
     const currentQuestionIndex = ref(+localStorage.getItem('index')! || 0)
-    const correctAnswerBorder = ref('')
-    const falseAnswerBorder = ref('')
-    const savedAnswers = ref<IQuestion[]>([])
-    const isGameOver = ref(localStorage.getItem('isGameOver')! || false)
     const isWinner = ref(localStorage.getItem('isWinner') || false)
-    const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
-    const score = ref(+localStorage.getItem('score')! || 0)
-    const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleWin () {
       localStorage.setItem('isWinner', JSON.stringify(true))
       isWinner.value = JSON.parse(localStorage.getItem('isWinner')!)
       localStorage.setItem('index', JSON.stringify(0))
     }
+
+    const savedAnswers = ref<IQuestion[]>([])
 
     function saveAsnwer () {
       savedAnswers.value.push(questionsData.value[currentQuestionIndex.value])
@@ -92,6 +87,8 @@ export default defineComponent({
     const easyQ = 4
     const midQ = 9
     const hardQ = 14
+
+    const score = ref(+localStorage.getItem('score')! || 0)
 
     function handleScore () {
       if (currentQuestionIndex.value <= easyQ) {
@@ -108,6 +105,9 @@ export default defineComponent({
       }
     }
 
+    const correctAnswerBorder = ref('')
+    const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
+
     function switchQuestion () {
       saveAsnwer()
       correctAnswerBorder.value = 'border-green-600'
@@ -122,6 +122,10 @@ export default defineComponent({
         answers.value = questionsData.value[currentQuestionIndex.value].answers
       }, 1000)
     }
+
+    const falseAnswerBorder = ref('')
+    const isGameOver = ref(localStorage.getItem('isGameOver')! || false)
+    const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleIncorrectAnswer () {
       if (!lifes.value) {
