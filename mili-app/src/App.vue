@@ -1,13 +1,15 @@
 <template>
-  <div
-    v-if="!isGameStarted"
-    class="flex flex-col items-center gap-5 m-5"
-  >
-    <WelcomeQuiz @handle-start="handleStart" />
-  </div>
-  <div v-else>
-    <Quiz />
-  </div>
+  <section class="py-6 md:py-28">
+    <div
+      v-if="!isGameStarted"
+      class="flex flex-col items-center gap-5 m-5"
+    >
+      <WelcomeQuiz @handle-start="handleStart" />
+    </div>
+    <div v-else>
+      <Quiz />
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
