@@ -3,148 +3,148 @@
     "id": 1,
     "question": "How to return all answers for the task on codewars?",
     "answers": [
-      { "text": "Return test answer", "isCorrect": true },
-      { "text": "Do the task", "isCorrect": false },
-      { "text": "Ask google", "isCorrect": false },
-      { "text": "It's impossible", "isCorrect": false }
+      { "variant": "A", "text": "Return test answer", "isCorrect": true },
+      { "variant": "B", "text": "Do the task", "isCorrect": false },
+      { "variant": "C", "text": "Ask google", "isCorrect": false },
+      { "variant": "D", "text": "It's impossible", "isCorrect": false }
     ]
   },
   {
     "id": 2,
     "question": "In which Lviv district live ded?",
     "answers": [
-      { "text": "With Misha", "isCorrect": true },
-      { "text": "Suhivskiy", "isCorrect": false },
-      { "text": "Near horse", "isCorrect": false },
-      { "text": "In Lviv subway", "isCorrect": false }
+      { "variant": "A", "text": "With Misha", "isCorrect": true },
+      { "variant": "B", "text": "Suhivskiy", "isCorrect": false },
+      { "variant": "C", "text": "Near horse", "isCorrect": false },
+      { "variant": "D", "text": "In Lviv subway", "isCorrect": false }
     ]
   },
   {
     "id": 3,
     "question": "Count of people who want to punch Valera in his face?",
     "answers": [
-      { "text": "6", "isCorrect": true },
-      { "text": "PI", "isCorrect": false },
-      { "text": "Math.round(Math.random() * 10)", "isCorrect": false },
-      { "text": "null", "isCorrect": false }
+      { "variant": "A", "text": "6", "isCorrect": true },
+      { "variant": "B", "text": "PI", "isCorrect": false },
+      { "variant": "D", "text": "Math.round(Math.random() * 10)", "isCorrect": false },
+      { "variant": "C", "text": "null", "isCorrect": false }
     ]
   },{
     "id": 4,
     "question": "Who love css?",
     "answer": "Oleg",
     "answers": [
-      { "text": "Oleg", "isCorrect": true },
-      { "text": "Everyone", "isCorrect": false },
-      { "text": "Rules", "isCorrect": false },
-      { "text": "IDK", "isCorrect": false }
+      { "variant": "A", "text": "Oleg", "isCorrect": true },
+      { "variant": "B", "text": "Everyone", "isCorrect": false },
+      { "variant": "C", "text": "Rules", "isCorrect": false },
+      { "variant": "D", "text": "IDK", "isCorrect": false }
     ]
   },
   {
     "id": 5,
     "question": "How to make this function sum(1, 2) which return 3?",
     "answers": [
-      { "text": "Return test answer", "isCorrect": false },
-      { "text": "return a + b", "isCorrect": false },
-      { "text": "Register on codewars", "isCorrect": true },
-      { "text": "Impossible", "isCorrect": false }
+      { "variant": "A", "text": "Return test answer", "isCorrect": false },
+      { "variant": "B", "text": "return a + b", "isCorrect": false },
+      { "variant": "C", "text": "Register on codewars", "isCorrect": true },
+      { "variant": "D", "text": "Impossible", "isCorrect": false }
     ]
   },
   {
     "id": 6,
     "question": "What you need to do when you want to order the food?",
     "answers": [
-      { "text": "Just do it", "isCorrect": false },
-      { "text": "Just wait", "isCorrect": true },
-      { "text": "Order food", "isCorrect": false },
-      { "text": "Don't mind , eat cookies", "isCorrect": false }
+      { "variant": "A", "text": "Just do it", "isCorrect": false },
+      { "variant": "B", "text": "Just wait", "isCorrect": true },
+      { "variant": "C", "text": "Order food", "isCorrect": false },
+      { "variant": "D", "text": "Don't mind , eat cookies", "isCorrect": false }
     ]
   },
   {
     "id": 7,
     "question": "Which fantom hero is real?",
     "answers": [
-      { "text": "Ded", "isCorrect": true },
-      { "text": "Sister", "isCorrect": false },
-      { "text": "Brother", "isCorrect": false },
-      { "text": "What?", "isCorrect": false }
+      { "variant": "A", "text": "Ded", "isCorrect": true },
+      { "variant": "B", "text": "Sister", "isCorrect": false },
+      { "variant": "C", "text": "Brother", "isCorrect": false },
+      { "variant": "D", "text": "What?", "isCorrect": false }
     ]
   },
   {
     "id": 8,
     "question": "What mean take a taxi in Striy?",
     "answers": [
-      { "text": "Smoke some stuff", "isCorrect": true },
-      { "text": "Take a taxi", "isCorrect": false },
-      { "text": "Help ded with garden", "isCorrect": false },
-      { "text": "You can't drink anymore", "isCorrect": false }
+      { "variant": "A", "text": "Smoke some stuff", "isCorrect": true },
+      { "variant": "B", "text": "Take a taxi", "isCorrect": false },
+      { "variant": "D", "text": "Help ded with garden", "isCorrect": false },
+      { "variant": "C", "text": "You can't drink anymore", "isCorrect": false }
     ]
   },
   {
     "id": 9,
     "question": "How big all known 'Hole'?",
     "answers": [
-      { "text": "Like a Earth", "isCorrect": false },
-      { "text": "Like a black hole", "isCorrect": false },
-      { "text": "Like a Vynnyky", "isCorrect": false },
-      { "text": "You can hide in it", "isCorrect": true }
+      { "variant": "A", "text": "Like a Earth", "isCorrect": false },
+      { "variant": "B", "text": "Like a black hole", "isCorrect": false },
+      { "variant": "C", "text": "Like a Vynnyky", "isCorrect": false },
+      { "variant": "D", "text": "You can hide in it", "isCorrect": true }
     ]
   },
   {
     "id": 10,
     "question": "What color of Valera limousine?",
     "answers": [
-      { "text": "Black", "isCorrect": false },
-      { "text": "White with hatch", "isCorrect": true },
-      { "text": "White", "isCorrect": false },
-      { "text": "#fff", "isCorrect": false }
+      { "variant": "A", "text": "Black", "isCorrect": false },
+      { "variant": "B", "text": "White with hatch", "isCorrect": true },
+      { "variant": "C", "text": "White", "isCorrect": false },
+      { "variant": "D", "text": "#fff", "isCorrect": false }
     ]
   },
   {
     "id": 11,
     "question": "Where you can find some examples of code?",
     "answers": [
-      { "text": "Odnoklasniky", "isCorrect": false },
-      { "text": "Magazine Maxime", "isCorrect": false },
-      { "text": "Codehub", "isCorrect": false },
-      { "text": "StackOverflow", "isCorrect": true }
+      { "variant": "A", "text": "Odnoklasniky", "isCorrect": false },
+      { "variant": "B", "text": "Magazine Maxime", "isCorrect": false },
+      { "variant": "C", "text": "Codehub", "isCorrect": false },
+      { "variant": "D", "text": "StackOverflow", "isCorrect": true }
     ]
   },
   {
     "id": 12,
     "question": "Who can learn 1 framework per day?",
     "answers": [
-      { "text": "Ded", "isCorrect": false },
-      { "text": "Misha", "isCorrect": true },
-      { "text": "Nobody from film 'Nobody'", "isCorrect": false },
-      { "text": "Nobody", "isCorrect": false }
+      { "variant": "A", "text": "Ded", "isCorrect": false },
+      { "variant": "B", "text": "Misha", "isCorrect": true },
+      { "variant": "C", "text": "Nobody from film 'Nobody'", "isCorrect": false },
+      { "variant": "D", "text": "Nobody", "isCorrect": false }
     ]
   },
   {
     "id": 13,
     "question": "What can repair ded?",
     "answers": [
-      { "text": "Everything you want", "isCorrect": true },
-      { "text": "Car", "isCorrect": false },
-      { "text": "Toilet", "isCorrect": false },
-      { "text": "Hole", "isCorrect": false }
+      { "variant": "A", "text": "Everything you want", "isCorrect": true },
+      { "variant": "B", "text": "Car", "isCorrect": false },
+      { "variant": "C", "text": "Toilet", "isCorrect": false },
+      { "variant": "D", "text": "Hole", "isCorrect": false }
     ]
   },{
     "id": 14,
     "question": "How many questions in this quiz?",
     "answers": [
-      { "text": "5", "isCorrect": false },
-      { "text": "20", "isCorrect": false },
-      { "text": "40", "isCorrect": false },
-      { "text": "15", "isCorrect": true }
+      { "variant": "A", "text": "5", "isCorrect": false },
+      { "variant": "B", "text": "20", "isCorrect": false },
+      { "variant": "C", "text": "40", "isCorrect": false },
+      { "variant": "D", "text": "15", "isCorrect": true }
     ]
   },{
     "id": 15,
     "question": "How many calls has Misha per day?",
     "answers": [
-      { "text": "1-2", "isCorrect": false },
-      { "text": "4", "isCorrect": false },
-      { "text": "Infinity", "isCorrect": true },
-      { "text": "0", "isCorrect": false }
+      { "variant": "A", "text": "1-2", "isCorrect": false },
+      { "variant": "B", "text": "4", "isCorrect": false },
+      { "variant": "D", "text": "Infinity", "isCorrect": true },
+      { "variant": "C", "text": "0", "isCorrect": false }
     ]
   }
 ]

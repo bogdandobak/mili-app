@@ -24,12 +24,6 @@
       >
         Lifes {{ lifes }}
       </p>
-      <p
-        v-else
-        class="text-center text-white font-semibold animate-pulse"
-      >
-        Last life
-      </p>
     </div>
     <LoseGame
       v-else-if="isGameOver && !isWinner"
@@ -111,12 +105,14 @@ export default defineComponent({
     function switchQuestion () {
       saveAsnwer()
       correctAnswerBorder.value = 'border-green-600'
+
       setTimeout(() => {
         localStorage.setItem('index', JSON.stringify(currentQuestionIndex.value + 1))
         if (+localStorage.getItem('index')! > questionsData.value.length - 1) {
           handleWin()
           return
         }
+
         currentQuestionIndex.value = +localStorage.getItem('index')!
         correctAnswerBorder.value = ''
         answers.value = questionsData.value[currentQuestionIndex.value].answers
@@ -128,14 +124,16 @@ export default defineComponent({
     const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleIncorrectAnswer () {
-      if (!lifes.value) {
+      if (lifes.value <= 1) {
         localStorage.setItem('isGameOver', JSON.stringify(true))
         isGameOver.value = JSON.parse(localStorage.getItem('isGameOver')!)
       }
+
       correctAnswerBorder.value = 'border-green-600'
       falseAnswerBorder.value = 'border-red-600'
       localStorage.setItem('lifes', JSON.stringify(lifes.value - 1))
       lifes.value = +localStorage.getItem('lifes')!
+
       setTimeout(() => {
         falseAnswerBorder.value = ''
         correctAnswerBorder.value = ''

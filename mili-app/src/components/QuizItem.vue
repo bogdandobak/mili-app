@@ -7,7 +7,7 @@
     :class="item.isCorrect ? correctAnswerBorder : correctAnswerBorder && falseAnswerBorder"
     @click="handleAnswer(item.text)"
   >
-    {{ item.text }}
+    {{ item.variant }}: {{ item.text }}
   </li>
 </template>
 
