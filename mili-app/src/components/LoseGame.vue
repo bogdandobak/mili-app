@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col gap-4">
-    <h2>
+  <div class="flex flex-col gap-4 items-center">
+    <h2 class="text-center text-purple-600 font-semibold">
       You lose the game
     </h2>
-    <p>Your score: {{ score }}</p>
+    <p class="text-center text-purple-600 font-semibold">Your score: {{ score }}</p>
     <button
       class="bg-purple-500 hover:bg-purple-700 text-white font-bold p-3 rounded w-32"
       @click="handleRestart"

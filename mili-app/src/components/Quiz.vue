@@ -21,7 +21,18 @@
           </li>
         </ul>
       </div>
-      <p>Lifes {{ lifes }}</p>
+      <p
+        v-if="lifes"
+        class="text-center text-purple-600 font-semibold"
+      >
+        Lifes {{ lifes }}
+      </p>
+      <p
+        v-else
+        class="text-center text-purple-600 font-semibold animate-pulse"
+      >
+        Last life
+      </p>
     </div>
     <LoseGame
       v-else-if="isGameOver && !isWinner"
