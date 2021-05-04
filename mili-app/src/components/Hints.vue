@@ -39,6 +39,7 @@ export default defineComponent({
   setup (_, { emit }) {
     const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 0)
     const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 0)
+
     function handleHint (type: string) {
       switch (type) {
         case EHints.Search:
