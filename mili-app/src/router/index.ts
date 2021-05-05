@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-import WelcomeQuiz from '@/components/WelcomeQuiz.vue'
-const Leaderboard = () => import('@/components/Leaderboard.vue')
-const Quiz = () => import('@/components/Quiz.vue')
+import WelcomeQuiz from '@/pages/WelcomeQuiz.vue'
+const Leaderboard = () => import('@/pages/Leaderboard.vue')
+const Quiz = () => import('@/pages/Quiz.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {

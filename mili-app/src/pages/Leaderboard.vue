@@ -32,11 +32,14 @@ export default defineComponent({
     async function getData () {
       const response = await getLeaderboardData()
       const result = response
+
       for (const key in result) {
         userData.value.push(result[key])
         userData.value.sort((currVal, nextVal) => nextVal.score - currVal.score)
       }
     }
+
+    getData()
 
     return {
       userData,
