@@ -8,12 +8,18 @@
   <BaseButton :handleButton="handleStart">
     Start game
   </BaseButton>
+  <Leaderboard />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Leaderboard from '@/components/Leaderboard.vue'
 
 export default defineComponent({
+  name: 'WelcomeQuiz',
+  components: {
+    Leaderboard
+  },
   emits: ['handle-start'],
   setup (_, { emit }) {
     function handleStart () {

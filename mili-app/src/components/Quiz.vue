@@ -21,6 +21,7 @@
       <p
         v-if="lifes"
         class="text-center text-white font-semibold"
+        :class="lifes < 2 ? 'animate-pulse' : ''"
       >
         Lifes {{ lifes }}
       </p>
@@ -63,7 +64,7 @@ export default defineComponent({
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
     const currentQuestionIndex = ref(+localStorage.getItem('index')! || 0)
-    const isWinner = ref(localStorage.getItem('isWinner') || false)
+    const isWinner = ref<boolean>(JSON.parse(localStorage.getItem('isWinner')!) || false)
 
     function handleWin () {
       localStorage.setItem('isWinner', JSON.stringify(true))
@@ -120,7 +121,7 @@ export default defineComponent({
     }
 
     const falseAnswerBorder = ref('')
-    const isGameOver = ref(localStorage.getItem('isGameOver')! || false)
+    const isGameOver = ref<boolean>(JSON.parse(localStorage.getItem('isGameOver')!) || false)
     const lifes = ref(+localStorage.getItem('lifes')! || 5)
 
     function handleIncorrectAnswer () {
@@ -160,6 +161,7 @@ export default defineComponent({
       const randomNumber = Math.round(Math.random() * 10)
       const randomIndex = randomNumber <= 2 ? randomNumber : 0
       const uncorrectAnswers = answers.value.filter(item => !item.isCorrect)
+
       answers.value = answers.value.filter(item => item.isCorrect)
       answers.value.push(uncorrectAnswers[randomIndex])
     }
