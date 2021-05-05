@@ -3,7 +3,7 @@
     <h2 class="text-white text-lg font-bold">
       Leaderboard
     </h2>
-    <ul class="text-white flex flex-col items-center gap-4">
+    <ul class="flex flex-col items-center gap-4 text-white font-semibold">
       <li
         v-for="user in userData"
         :key="user.name"
