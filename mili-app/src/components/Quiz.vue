@@ -176,7 +176,6 @@ export default defineComponent({
       localStorage.clear()
       currentQuestionIndex.value = 0
       answers.value = questionsData.value[currentQuestionIndex.value].answers
-      localStorage.setItem('isGameStarted', JSON.stringify(true))
     }
 
     return {

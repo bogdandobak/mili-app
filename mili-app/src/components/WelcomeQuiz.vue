@@ -5,21 +5,21 @@
   <p class="text-center text-white font-semibold">
     In this game, you will face very hard questions. Good luck
   </p>
-  <BaseButton :handleButton="handleStart">
+  <BaseButton link="/quiz">
     Start game
   </BaseButton>
-  <Leaderboard />
+  <BaseButton
+    link="/leaderboard"
+  >
+    Leaderboard
+  </BaseButton>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Leaderboard from '@/components/Leaderboard.vue'
 
 export default defineComponent({
   name: 'WelcomeQuiz',
-  components: {
-    Leaderboard
-  },
   emits: ['handle-start'],
   setup (_, { emit }) {
     function handleStart () {

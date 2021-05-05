@@ -8,6 +8,9 @@
     <BaseButton :handleButton="handleRestart">
       Try again
     </BaseButton>
+    <BaseButton link="/">
+      Home
+    </BaseButton>
   </div>
 </template>
 
