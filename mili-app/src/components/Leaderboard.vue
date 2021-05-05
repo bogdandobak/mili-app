@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IUser } from '@/modules/IUser'
 import { getLeaderboardData } from '@/api/api'
 
@@ -37,10 +37,6 @@ export default defineComponent({
         userData.value.sort((currVal, nextVal) => nextVal.score - currVal.score)
       }
     }
-
-    onBeforeMount(() => {
-      getData()
-    })
 
     return {
       userData,
