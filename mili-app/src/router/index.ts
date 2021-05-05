@@ -19,6 +19,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/quiz',
     name: 'Quiz',
     component: Quiz
+  },
+  {
+    path: '/:notFound(.*)',
+    component: WelcomeQuiz
   }
 ]
 
