@@ -12,9 +12,9 @@
         <ul>
           <QuizItem
             :answers="answers"
-            :correctAnswerBorder="correctAnswerBorder"
-            :falseAnswerBorder="falseAnswerBorder"
-            @handle-answer="handleAnswer"
+            :switchQuestion="switchQuestion"
+            :handleIncorrectAnswer="handleIncorrectAnswer"
+            :handleScore="handleScore"
           />
         </ul>
       </div>
@@ -40,8 +40,7 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onBeforeUpdate } from 'vue'
 
 import QuizItem from '@/components/QuizItem.vue'
 import LoseGame from '@/components/LoseGame.vue'
@@ -49,6 +48,7 @@ import WinGame from '@/components/WinGame.vue'
 import Hints from '@/components/Hints.vue'
 
 import questions from '@/data/questions.json'
+import { localStorageService } from '@/services/localStorageService'
 
 import { IQuestion } from '@/modules/IQuestion'
 import { IAnswer } from '@/modules/IAnswer'
@@ -63,41 +63,29 @@ export default defineComponent({
   },
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
-    const currentQuestionIndex = ref(+localStorage.getItem('index')! || 0)
-    const isWinner = ref<boolean>(JSON.parse(localStorage.getItem('isWinner')!) || false)
+
+    const currentQuestionIndex = ref(localStorageService.getItem('index') || 0)
+
+    const isWinner = ref(localStorageService.getItem('isWinner') || false)
+
+    const lifes = ref(localStorageService.getItem('lifes') || 5)
 
     function handleWin () {
-      localStorage.setItem('isWinner', JSON.stringify(true))
-      isWinner.value = JSON.parse(localStorage.getItem('isWinner')!)
-      localStorage.setItem('index', JSON.stringify(0))
+      isWinner.value = true
+      currentQuestionIndex.value = 0
     }
 
     const savedAnswers = ref<IQuestion[]>([])
 
     function saveAsnwer () {
       savedAnswers.value.push(questionsData.value[currentQuestionIndex.value])
-      localStorage.setItem('answers', JSON.stringify(savedAnswers))
+      localStorageService.setItem('answers', savedAnswers.value)
     }
 
-    const easyQ = 4
-    const midQ = 9
-    const hardQ = 14
-
-    const score = ref(+localStorage.getItem('score')! || 0)
+    const score = ref(localStorageService.getItem('score') || 0)
 
     function handleScore () {
-      if (currentQuestionIndex.value <= easyQ) {
-        localStorage.setItem('score', JSON.stringify(score.value + 1))
-        score.value = +localStorage.getItem('score')!
-      }
-      if (currentQuestionIndex.value > easyQ && currentQuestionIndex.value <= midQ) {
-        localStorage.setItem('score', JSON.stringify(score.value + 3))
-        score.value = +localStorage.getItem('score')!
-      }
-      if (currentQuestionIndex.value > midQ && currentQuestionIndex.value <= hardQ) {
-        localStorage.setItem('score', JSON.stringify(score.value + 5))
-        score.value = +localStorage.getItem('score')!
-      }
+      score.value += questionsData.value[currentQuestionIndex.value].points
     }
 
     const correctAnswerBorder = ref('')
@@ -105,56 +93,25 @@ export default defineComponent({
 
     function switchQuestion () {
       saveAsnwer()
-      correctAnswerBorder.value = 'border-green-600'
-
-      setTimeout(() => {
-        localStorage.setItem('index', JSON.stringify(currentQuestionIndex.value + 1))
-        if (+localStorage.getItem('index')! > questionsData.value.length - 1) {
-          handleWin()
-          return
-        }
-
-        currentQuestionIndex.value = +localStorage.getItem('index')!
-        correctAnswerBorder.value = ''
-        answers.value = questionsData.value[currentQuestionIndex.value].answers
-      }, 1000)
-    }
-
-    const falseAnswerBorder = ref('')
-    const isGameOver = ref<boolean>(JSON.parse(localStorage.getItem('isGameOver')!) || false)
-    const lifes = ref(+localStorage.getItem('lifes')! || 5)
-
-    function handleIncorrectAnswer () {
-      if (lifes.value <= 1) {
-        localStorage.setItem('isGameOver', JSON.stringify(true))
-        isGameOver.value = JSON.parse(localStorage.getItem('isGameOver')!)
-      }
-
-      correctAnswerBorder.value = 'border-green-600'
-      falseAnswerBorder.value = 'border-red-600'
-      localStorage.setItem('lifes', JSON.stringify(lifes.value - 1))
-      lifes.value = +localStorage.getItem('lifes')!
-
-      setTimeout(() => {
-        falseAnswerBorder.value = ''
-        correctAnswerBorder.value = ''
-      }, 1000)
-    }
-
-    function handleAnswer (answer: string) {
-      const answerData = questionsData.value[currentQuestionIndex.value].answers.find(item => item.text === answer)
-
-      if (+localStorage.getItem('index')! > questionsData.value.length - 1) {
+      currentQuestionIndex.value += 1
+      if (currentQuestionIndex.value > questionsData.value.length - 1) {
+        handleWin()
         return
       }
 
-      if (answerData?.isCorrect && lifes.value) {
-        switchQuestion()
-        handleScore()
-      } else {
-        handleIncorrectAnswer()
-        switchQuestion()
+      answers.value = questionsData.value[currentQuestionIndex.value].answers
+    }
+
+    const falseAnswerBorder = ref('')
+
+    const isGameOver = ref(localStorageService.getItem('isGameOver') || false)
+
+    function handleIncorrectAnswer () {
+      if (lifes.value <= 1) {
+        isGameOver.value = true
       }
+
+      lifes.value -= 1
     }
 
     function handleHintHalf () {
@@ -166,14 +123,25 @@ export default defineComponent({
       answers.value.push(uncorrectAnswers[randomIndex])
     }
 
+    function saveData () {
+      localStorageService.setItem('index', currentQuestionIndex.value)
+      localStorageService.setItem('score', score.value)
+      localStorageService.setItem('isWinner', isWinner.value)
+      localStorageService.setItem('isGameOver', isGameOver.value)
+    }
+
+    saveData()
+
+    onBeforeUpdate(() => {
+      saveData()
+    })
+
     function handleRestart () {
       lifes.value = 5
       score.value = 0
-      falseAnswerBorder.value = ''
-      correctAnswerBorder.value = ''
       isGameOver.value = false
       isWinner.value = false
-      localStorage.clear()
+      localStorageService.clear()
       currentQuestionIndex.value = 0
       answers.value = questionsData.value[currentQuestionIndex.value].answers
     }
@@ -181,7 +149,6 @@ export default defineComponent({
     return {
       questionsData,
       currentQuestionIndex,
-      handleAnswer,
       isGameOver,
       handleRestart,
       correctAnswerBorder,
@@ -190,7 +157,10 @@ export default defineComponent({
       isWinner,
       answers,
       score,
-      lifes
+      lifes,
+      switchQuestion,
+      handleScore,
+      handleIncorrectAnswer
     }
   }
 })

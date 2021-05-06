@@ -15,9 +15,9 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent } from 'vue'
 import { sendScore } from '@/api/api'
+import { localStorageService } from '@/services/localStorageService'
 
 export default defineComponent({
   name: 'WinGame',
@@ -36,7 +36,7 @@ export default defineComponent({
     function sendData () {
       const newUser = {
         name: `User ${+new Date()}`,
-        score: +localStorage.getItem('score')!
+        score: localStorageService.getItem('score')
       }
       sendScore(newUser)
     }

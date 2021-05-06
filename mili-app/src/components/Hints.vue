@@ -25,9 +25,9 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineComponent, ref } from 'vue'
 import { EHints } from '@/modules/EHints'
+import { localStorageService } from '@/services/localStorageService'
 
 export default defineComponent({
   props: {
@@ -38,18 +38,18 @@ export default defineComponent({
   },
   emits: ['handle-hint-half'],
   setup (_, { emit }) {
-    const searchCanUseTimes = ref(+localStorage.getItem('hintSearch')! || 0)
-    const halfCanUseTimes = ref(+localStorage.getItem('hintHalf')! || 0)
+    const searchCanUseTimes = ref(localStorageService.getItem('hintSearch') || 0)
+    const halfCanUseTimes = ref(localStorageService.getItem('hintHalf') || 0)
 
     function handleHint (type: string) {
       switch (type) {
         case EHints.Search:
-          localStorage.setItem('hintSearch', JSON.stringify(searchCanUseTimes.value + 1))
-          searchCanUseTimes.value = +localStorage.getItem('hintSearch')!
+          localStorageService.setItem('hintSearch', (searchCanUseTimes.value + 1))
+          searchCanUseTimes.value = localStorageService.getItem('hintSearch')
           break
         case EHints.Half:
-          localStorage.setItem('hintHalf', JSON.stringify(halfCanUseTimes.value + 1))
-          halfCanUseTimes.value = +localStorage.getItem('hintHalf')!
+          localStorageService.setItem('hintHalf', (halfCanUseTimes.value + 1))
+          halfCanUseTimes.value = localStorageService.getItem('hintHalf')
           emit('handle-hint-half')
           break
         default:

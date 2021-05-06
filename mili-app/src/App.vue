@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col items-center gap-5 py-6 md:py-28">
+  <section class="flex flex-col items-center gap-5 py-10 md:py-28">
     <router-view />
   </section>
 </template>
