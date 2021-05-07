@@ -5,7 +5,7 @@
   <p class="text-center text-white font-semibold">
     In this game, you will face very hard questions. Good luck
   </p>
-  <BaseButton link="/quiz">
+  <BaseButton link="/quiz" :handleButton="resetStorage">
     Start game
   </BaseButton>
   <BaseButton
@@ -17,17 +17,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { localStorageService } from '@/services/localStorageService'
 
 export default defineComponent({
   name: 'WelcomeQuiz',
-  emits: ['handle-start'],
-  setup (_, { emit }) {
-    function handleStart () {
-      emit('handle-start')
+  setup () {
+    function resetStorage () {
+      localStorageService.clear()
     }
 
     return {
-      handleStart
+      resetStorage
     }
   }
 })

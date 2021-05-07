@@ -10,6 +10,7 @@
     v-else
     class="bg-purple-400 hover:bg-purple-700 text-center text-white font-bold p-3 rounded w-32 transition-colors"
     :to="link"
+    @click="handleButton"
   >
     <slot />
   </router-link>
@@ -19,6 +20,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  name: 'BaseButton',
   props: {
     handleButton: {
       type: Function,

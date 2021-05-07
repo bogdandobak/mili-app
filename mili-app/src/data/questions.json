@@ -157,8 +157,8 @@
     "answers": [
       { "variant": "A", "text": "1-2", "isCorrect": false },
       { "variant": "B", "text": "4", "isCorrect": false },
-      { "variant": "D", "text": "Infinity", "isCorrect": true },
-      { "variant": "C", "text": "0", "isCorrect": false }
+      { "variant": "C", "text": "Infinity", "isCorrect": true },
+      { "variant": "D", "text": "0", "isCorrect": false }
     ]
   }
 ]

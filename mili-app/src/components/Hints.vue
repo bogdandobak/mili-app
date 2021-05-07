@@ -30,6 +30,7 @@ import { EHints } from '@/modules/EHints'
 import { localStorageService } from '@/services/localStorageService'
 
 export default defineComponent({
+  name: 'Hints',
   props: {
     questionsText: {
       type: String,
@@ -38,8 +39,8 @@ export default defineComponent({
   },
   emits: ['handle-hint-half'],
   setup (_, { emit }) {
-    const searchCanUseTimes = ref(localStorageService.getItem('hintSearch') || 0)
-    const halfCanUseTimes = ref(localStorageService.getItem('hintHalf') || 0)
+    const searchCanUseTimes = ref<number>(localStorageService.getItem('hintSearch') || 0)
+    const halfCanUseTimes = ref<number>(localStorageService.getItem('hintHalf') || 0)
 
     function handleHint (type: string) {
       switch (type) {

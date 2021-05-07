@@ -3,7 +3,16 @@
     <h2 class="text-white text-lg font-bold">
       Leaderboard
     </h2>
-    <ul class="flex flex-col items-center gap-4 text-white font-semibold">
+    <p
+      v-if="!userData"
+      class="text-white font-semibold"
+    >
+      No users data
+    </p>
+    <ul
+      v-else
+      class="flex flex-col items-center gap-4 text-white font-semibold"
+    >
       <li
         v-for="user in userData"
         :key="user.name"
@@ -26,6 +35,7 @@ import { IUser } from '@/modules/IUser'
 import { getLeaderboardData } from '@/api/api'
 
 export default defineComponent({
+  name: 'Leaderboard',
   setup () {
     const userData = ref<IUser[]>([])
 

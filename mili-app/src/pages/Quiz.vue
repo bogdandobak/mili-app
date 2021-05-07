@@ -12,9 +12,9 @@
         <ul>
           <QuizItem
             :answers="answers"
-            :switchQuestion="switchQuestion"
-            :handleIncorrectAnswer="handleIncorrectAnswer"
-            :handleScore="handleScore"
+            @switch-question="switchQuestion"
+            @handle-incorrect-answer="handleIncorrectAnswer"
+            @handle-score="handleScore"
           />
         </ul>
       </div>
@@ -63,36 +63,24 @@ export default defineComponent({
   },
   setup () {
     const questionsData = ref<IQuestion[]>(questions)
-
-    const currentQuestionIndex = ref(localStorageService.getItem('index') || 0)
-
-    const isWinner = ref(localStorageService.getItem('isWinner') || false)
-
-    const lifes = ref(localStorageService.getItem('lifes') || 5)
+    const currentQuestionIndex = ref<number>(localStorageService.getItem('index') || 0)
+    const isWinner = ref<boolean>(localStorageService.getItem('isWinner') || false)
+    const lifes = ref<number>(localStorageService.getItem('lifes') || 5)
 
     function handleWin () {
       isWinner.value = true
-      currentQuestionIndex.value = 0
+      currentQuestionIndex.value = questionsData.value.length - 1
     }
 
-    const savedAnswers = ref<IQuestion[]>([])
-
-    function saveAsnwer () {
-      savedAnswers.value.push(questionsData.value[currentQuestionIndex.value])
-      localStorageService.setItem('answers', savedAnswers.value)
-    }
-
-    const score = ref(localStorageService.getItem('score') || 0)
+    const score = ref<number>(localStorageService.getItem('score') || 0)
 
     function handleScore () {
       score.value += questionsData.value[currentQuestionIndex.value].points
     }
 
-    const correctAnswerBorder = ref('')
     const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
 
     function switchQuestion () {
-      saveAsnwer()
       currentQuestionIndex.value += 1
       if (currentQuestionIndex.value > questionsData.value.length - 1) {
         handleWin()
@@ -102,9 +90,7 @@ export default defineComponent({
       answers.value = questionsData.value[currentQuestionIndex.value].answers
     }
 
-    const falseAnswerBorder = ref('')
-
-    const isGameOver = ref(localStorageService.getItem('isGameOver') || false)
+    const isGameOver = ref<boolean>(localStorageService.getItem('isGameOver') || false)
 
     function handleIncorrectAnswer () {
       if (lifes.value <= 1) {
@@ -114,26 +100,26 @@ export default defineComponent({
       lifes.value -= 1
     }
 
+    const answersLength = answers.value.length - 1
+
     function handleHintHalf () {
       const randomNumber = Math.round(Math.random() * 10)
-      const randomIndex = randomNumber <= 2 ? randomNumber : 0
-      const uncorrectAnswers = answers.value.filter(item => !item.isCorrect)
+      const randomIndex = randomNumber <= answersLength ? randomNumber : 0
+      const incorrectAnswers = answers.value.filter(item => !item.isCorrect)
 
       answers.value = answers.value.filter(item => item.isCorrect)
-      answers.value.push(uncorrectAnswers[randomIndex])
+      answers.value.push(incorrectAnswers[randomIndex])
     }
 
-    function saveData () {
+    function saveDataToStorage () {
       localStorageService.setItem('index', currentQuestionIndex.value)
       localStorageService.setItem('score', score.value)
       localStorageService.setItem('isWinner', isWinner.value)
       localStorageService.setItem('isGameOver', isGameOver.value)
     }
 
-    saveData()
-
     onBeforeUpdate(() => {
-      saveData()
+      saveDataToStorage()
     })
 
     function handleRestart () {
@@ -141,8 +127,8 @@ export default defineComponent({
       score.value = 0
       isGameOver.value = false
       isWinner.value = false
-      localStorageService.clear()
       currentQuestionIndex.value = 0
+      localStorageService.clear()
       answers.value = questionsData.value[currentQuestionIndex.value].answers
     }
 
@@ -151,8 +137,6 @@ export default defineComponent({
       currentQuestionIndex,
       isGameOver,
       handleRestart,
-      correctAnswerBorder,
-      falseAnswerBorder,
       handleHintHalf,
       isWinner,
       answers,
