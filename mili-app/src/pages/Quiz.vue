@@ -97,7 +97,7 @@ export default defineComponent({
       score.value += questionsData.value[currentQuestionIndex.value].points
     }
 
-    const answers = ref<IAnswer[]>(questionsData.value[currentQuestionIndex.value].answers)
+    const answers = ref<IAnswer[]>(localStorageService.getItem('answers') || questionsData.value[currentQuestionIndex.value].answers)
 
     function switchQuestion () {
       currentQuestionIndex.value += 1
@@ -141,6 +141,7 @@ export default defineComponent({
       localStorageService.setItem('isWinner', isWinner.value)
       localStorageService.setItem('isGameOver', isGameOver.value)
       localStorageService.setItem('savedCount', answersCount.value)
+      localStorageService.setItem('answers', answers.value)
     }
 
     onBeforeUpdate(() => {
