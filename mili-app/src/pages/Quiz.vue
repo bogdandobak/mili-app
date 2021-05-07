@@ -59,7 +59,7 @@ import LoseGame from '@/components/LoseGame.vue'
 import WinGame from '@/components/WinGame.vue'
 import Hints from '@/components/Hints.vue'
 
-import questions from '@/data/questions.json'
+import questionsS from '@/data/questionsS.json'
 import { localStorageService } from '@/services/localStorageService'
 
 import { IQuestion } from '@/modules/IQuestion'
@@ -75,7 +75,7 @@ export default defineComponent({
     QuizItem
   },
   setup () {
-    const questionsData = ref<IQuestion[]>(questions)
+    const questionsData = ref<IQuestion[]>(questionsS)
     const currentQuestionIndex = ref<number>(localStorageService.getItem('index') || 0)
     const isWinner = ref<boolean>(localStorageService.getItem('isWinner') || false)
     const lifes = ref<number>(localStorageService.getItem('lifes') || 5)

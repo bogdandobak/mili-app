@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "question": "Which county cricket side is based at Chester-le-Street?",
+    "points": 1,
+    "answers": [
+      { "variant": "A", "text": "Warwickshire", "isCorrect": false },
+      { "variant": "B", "text": "Durham", "isCorrect": true },
+      { "variant": "C", "text": "Northants", "isCorrect": false },
+      { "variant": "D", "text": "Leicestershire", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Which monarch was known as 'the wisest fool in Christendom'?",
+    "points": 1,
+    "answers": [
+      { "variant": "A", "text": "James I", "isCorrect": true },
+      { "variant": "B", "text": "Charles I", "isCorrect": false },
+      { "variant": "C", "text": "Edward I", "isCorrect": false },
+      { "variant": "D", "text": "Henry I", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Which king was married to Eleanor of Aquitaine?",
+    "points": 1,
+    "answers": [
+      { "variant": "A", "text": "Henry I", "isCorrect": false },
+      { "variant": "B", "text": "Henry II", "isCorrect": true },
+      { "variant": "D", "text": "Richard I", "isCorrect": false },
+      { "variant": "C", "text": "Henry V", "isCorrect": false }
+    ]
+  },{
+    "id": 4,
+    "question": "Oberon is the satellite of which planet?",
+    "points": 1,
+    "answers": [
+      { "variant": "A", "text": "Uranus", "isCorrect": true },
+      { "variant": "B", "text": "Mercury", "isCorrect": false },
+      { "variant": "C", "text": "Neptune", "isCorrect": false },
+      { "variant": "D", "text": "Mars", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "In 1912, former US President Theodore Roosevelt was a candidate for which political party?",
+    "points": 1,
+    "answers": [
+      { "variant": "A", "text": "Bull Moose", "isCorrect": true },
+      { "variant": "B", "text": "Bull Dog", "isCorrect": false },
+      { "variant": "C", "text": "Bull Elephant", "isCorrect": false },
+      { "variant": "D", "text": "Bull Frog", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Tomas Masaryk was the first president of which country?",
+    "points": 3,
+    "answers": [
+      { "variant": "A", "text": "Czechoslovakia", "isCorrect": true },
+      { "variant": "B", "text": "Poland", "isCorrect": false },
+      { "variant": "C", "text": "Hungary", "isCorrect": false },
+      { "variant": "D", "text": "Yugoslavia", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "If you planted the seeds of 'Quercus robur', what would grow?",
+    "points": 3,
+    "answers": [
+      { "variant": "A", "text": "Trees", "isCorrect": true },
+      { "variant": "B", "text": "Flowers", "isCorrect": false },
+      { "variant": "C", "text": "Vegetables", "isCorrect": false },
+      { "variant": "D", "text": "Grain", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "A number one followed by one hundred zeros is known by what name?",
+    "points": 3,
+    "answers": [
+      { "variant": "A", "text": "Googol", "isCorrect": true },
+      { "variant": "B", "text": "Megatron", "isCorrect": false },
+      { "variant": "D", "text": "Gigabit", "isCorrect": false },
+      { "variant": "C", "text": "Nanomole", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Which scientific unit is named after an Italian nobleman?",
+    "points": 3,
+    "answers": [
+      { "variant": "A", "text": "Pascal", "isCorrect": false },
+      { "variant": "B", "text": "Ohm", "isCorrect": false },
+      { "variant": "C", "text": "Volt", "isCorrect": true },
+      { "variant": "D", "text": "Hertz", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "What was the occupation of the composer Borodin?",
+    "points": 3,
+    "answers": [
+      { "variant": "A", "text": "Naval captain", "isCorrect": false },
+      { "variant": "B", "text": "Chemist", "isCorrect": true },
+      { "variant": "C", "text": "Lawyer", "isCorrect": false },
+      { "variant": "D", "text": "Chef", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Which of these is a butterfly, not a moth?",
+    "points": 5,
+    "answers": [
+      { "variant": "A", "text": "Mother Shipton", "isCorrect": false },
+      { "variant": "B", "text": "Red Underwing", "isCorrect": false },
+      { "variant": "C", "text": "Burnished Brass", "isCorrect": false },
+      { "variant": "D", "text": "Speckled Wood", "isCorrect": true }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Which of these is not one of the American Triple Crown horse races?",
+    "points": 5,
+    "answers": [
+      { "variant": "A", "text": "Anrlington Million", "isCorrect": true },
+      { "variant": "B", "text": "Belmont Stakes", "isCorrect": false },
+      { "variant": "C", "text": "Kentucky Derby", "isCorrect": false },
+      { "variant": "D", "text": "Preakness Stakes", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Who was the first man to travel into space twice?",
+    "points": 5,
+    "answers": [
+      { "variant": "A", "text": "Vladimir Titov", "isCorrect": false },
+      { "variant": "B", "text": "Michael Collins", "isCorrect": false },
+      { "variant": "C", "text": "Gus Grissom", "isCorrect": true },
+      { "variant": "D", "text": "Yuri Gagarin", "isCorrect": false }
+    ]
+  },{
+    "id": 14,
+    "question": "Which boxer was famous for striking the gong in the introduction to J. Arthur Rank films?",
+    "points": 5,
+    "answers": [
+      { "variant": "A", "text": "Billy Wells", "isCorrect": true },
+      { "variant": "B", "text": "Freddie Mills", "isCorrect": false },
+      { "variant": "C", "text": "Terry Spinks", "isCorrect": false },
+      { "variant": "D", "text": "Don Cokell", "isCorrect": false }
+    ]
+  },{
+    "id": 15,
+    "question": "In 1718, which pirate died in battle off the coast of what is now North Carolina?",
+    "points": 5,
+    "answers": [
+      { "variant": "A", "text": "Calico Jack", "isCorrect": false },
+      { "variant": "B", "text": "Blackbeard", "isCorrect": true },
+      { "variant": "C", "text": "Bartholomew Roberts", "isCorrect": false },
+      { "variant": "D", "text": "Captain Kidd", "isCorrect": false }
+    ]
+  }
+]
