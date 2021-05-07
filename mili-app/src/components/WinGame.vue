@@ -5,9 +5,6 @@
     <BaseButton :handleButton="sendData">
       Save your result
     </BaseButton>
-    <BaseButton :handleButton="handleRestart">
-      Try again
-    </BaseButton>
     <BaseButton link="/">
       Home
     </BaseButton>
@@ -27,12 +24,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ['handle-restart'],
-  setup (_, { emit }) {
-    function handleRestart () {
-      emit('handle-restart')
-    }
-
+  setup () {
     function sendData () {
       const newUser = {
         name: `User ${+new Date()}`,
@@ -42,7 +34,6 @@ export default defineComponent({
     }
 
     return {
-      handleRestart,
       sendData
     }
   }

@@ -46,7 +46,6 @@
     <WinGame
       v-else
       :score="score"
-      @handle-restart="handleRestart"
     />
   </section>
 </template>

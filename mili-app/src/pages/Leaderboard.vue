@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col items-center gap-4">
+  <section class="flex flex-col items-center gap-4 p-24">
     <h2 class="text-white text-lg font-bold">
       Leaderboard
     </h2>
