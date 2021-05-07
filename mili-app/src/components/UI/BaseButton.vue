@@ -1,14 +1,14 @@
 <template>
   <button
     v-if="!link"
-    class="bg-purple-400 hover:bg-purple-700 text-white text-center font-bold p-3 rounded w-32 transition-colors"
+    class="bg-primary hover:bg-hoverP text-white text-center font-bold p-3 rounded w-32 transition-colors"
     @click="handleButton"
   >
     <slot />
   </button>
   <router-link
     v-else
-    class="bg-purple-400 hover:bg-purple-700 text-center text-white font-bold p-3 rounded w-32 transition-colors"
+    class="bg-primary hover:bg-hoverP text-center text-white font-bold p-3 rounded w-32 transition-colors"
     :to="link"
     @click="handleButton"
   >
@@ -25,7 +25,7 @@ export default defineComponent({
     handleButton: {
       type: Function,
       required: false,
-      default: null
+      default: () => { console.log('default') }
     },
     link: {
       type: String,

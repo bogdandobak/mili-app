@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col items-center m-5">
+  <section class="flex flex-col items-center p-24">
     <div v-if="!isGameOver && !isWinner">
       <h2 class="text-center text-white font-bold">
         {{ questionsData[currentQuestionIndex].question }}
@@ -25,6 +25,18 @@
       >
         Lifes {{ lifes }}
       </p>
+      <ul
+        v-if="answersCount.length > 0"
+        class="flex flex-row gap-2 justify-center font-bold"
+      >
+        <li
+          v-for="item in answersCount"
+          :key="item.id"
+          :class="item.isCorrect ? 'text-green-700' : 'text-red-700'"
+        >
+          {{ item.id }}
+        </li>
+      </ul>
     </div>
     <LoseGame
       v-else-if="isGameOver && !isWinner"
@@ -52,6 +64,7 @@ import { localStorageService } from '@/services/localStorageService'
 
 import { IQuestion } from '@/modules/IQuestion'
 import { IAnswer } from '@/modules/IAnswer'
+import { IAnswerCount } from '@/modules/IAnswerCount'
 
 export default defineComponent({
   name: 'Quiz',
@@ -66,6 +79,7 @@ export default defineComponent({
     const currentQuestionIndex = ref<number>(localStorageService.getItem('index') || 0)
     const isWinner = ref<boolean>(localStorageService.getItem('isWinner') || false)
     const lifes = ref<number>(localStorageService.getItem('lifes') || 5)
+    const answersCount = ref<IAnswerCount[]>(localStorageService.getItem('savedCount') || [])
 
     function handleWin () {
       isWinner.value = true
@@ -75,6 +89,11 @@ export default defineComponent({
     const score = ref<number>(localStorageService.getItem('score') || 0)
 
     function handleScore () {
+      const newItem = {
+        id: currentQuestionIndex.value,
+        isCorrect: true
+      }
+      answersCount.value.push(newItem)
       score.value += questionsData.value[currentQuestionIndex.value].points
     }
 
@@ -96,7 +115,11 @@ export default defineComponent({
       if (lifes.value <= 1) {
         isGameOver.value = true
       }
-
+      const newItem = {
+        id: currentQuestionIndex.value,
+        isCorrect: false
+      }
+      answersCount.value.push(newItem)
       lifes.value -= 1
     }
 
@@ -114,8 +137,10 @@ export default defineComponent({
     function saveDataToStorage () {
       localStorageService.setItem('index', currentQuestionIndex.value)
       localStorageService.setItem('score', score.value)
+      localStorageService.setItem('lifes', lifes.value)
       localStorageService.setItem('isWinner', isWinner.value)
       localStorageService.setItem('isGameOver', isGameOver.value)
+      localStorageService.setItem('savedCount', answersCount.value)
     }
 
     onBeforeUpdate(() => {
@@ -128,8 +153,9 @@ export default defineComponent({
       isGameOver.value = false
       isWinner.value = false
       currentQuestionIndex.value = 0
-      localStorageService.clear()
+      answersCount.value = []
       answers.value = questionsData.value[currentQuestionIndex.value].answers
+      localStorageService.clear()
     }
 
     return {
@@ -144,7 +170,8 @@ export default defineComponent({
       lifes,
       switchQuestion,
       handleScore,
-      handleIncorrectAnswer
+      handleIncorrectAnswer,
+      answersCount
     }
   }
 })

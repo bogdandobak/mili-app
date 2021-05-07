@@ -1,4 +1,9 @@
 <template>
+  <img
+    class="w-56 h-58"
+    src="https://wwbm.com/images/logo.webp"
+    alt="Millionaire logo"
+  >
   <h1 class="font-bold text-xl text-white text-center">
     Welcome to the Game
   </h1>

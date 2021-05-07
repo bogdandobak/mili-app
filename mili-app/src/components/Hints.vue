@@ -6,14 +6,14 @@
     <p class="text-center text-white font-semibold">Hints:</p>
     <button
       v-if="halfCanUseTimes < 2"
-      class="h-10 p-2 bg-purple-400 hover:bg-purple-700 text-white font-bold rounded transition-colors"
+      class="h-10 p-2 bg-primary hover:bg-hoverP text-white font-bold rounded transition-colors"
       @click="handleHint('half')"
     >
       50:50
     </button>
     <a
       v-if="searchCanUseTimes < 2"
-      class="h-10 p-2 bg-purple-400 hover:bg-purple-700 text-white font-bold rounded transition-colors"
+      class="h-10 p-2 bg-primary hover:bg-hoverP text-white font-bold rounded transition-colors"
       :href="`https://www.google.com/search?q=${questionsText}`"
       target="_blank"
       rel="opener"
