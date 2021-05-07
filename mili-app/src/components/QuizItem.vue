@@ -2,9 +2,9 @@
   <li
     v-for="(item, index) in answers"
     :key="item.variant"
-    class="background m-2 w-72 border-2 border-transparent text-white text-center bg-purple-400 rounded-md
-          hover:bg-purple-700 hover:text-white transition-colors duration-1000"
-    :class="item.isCorrect ? correctAnswerBorder : correctAnswerBorder && falseAnswerBorder"
+    class="background m-2 w-72 text-white text-center rounded-md
+          hover:bg-purple-700 transition-colors duration-1000"
+    :class="item.isCorrect ? correctAnswerText : correctAnswerText && falseAnswerText"
     @click="handleAnswer(index, event)"
   >
     {{ item.variant }}: {{ item.text }}
@@ -25,35 +25,35 @@ export default defineComponent({
   },
   emits: ['switch-question', 'handle-score', 'handle-incorrect-answer'],
   setup (props, { emit }) {
-    const correctAnswerBorder = ref('')
-    const falseAnswerBorder = ref('')
+    const correctAnswerText = ref('')
+    const falseAnswerText = ref('')
 
     function handleAnswer (itemIndex: number) {
       const answerData = props.answers.find((_, index) => index === itemIndex)
 
       if (answerData?.isCorrect) {
-        correctAnswerBorder.value = 'border-green-700 pointer-events-none'
+        correctAnswerText.value = 'text-green-700 pointer-events-none'
         setTimeout(() => {
           emit('handle-score')
         }, 1000)
       } else {
-        correctAnswerBorder.value = 'border-green-700 pointer-events-none'
-        falseAnswerBorder.value = 'border-red-700 pointer-events-none'
+        correctAnswerText.value = 'text-green-700 pointer-events-none'
+        falseAnswerText.value = 'text-red-700 pointer-events-none'
         setTimeout(() => {
           emit('handle-incorrect-answer')
         }, 1000)
       }
       setTimeout(() => {
         emit('switch-question')
-        correctAnswerBorder.value = ''
-        falseAnswerBorder.value = ''
-      }, 900)
+        correctAnswerText.value = ''
+        falseAnswerText.value = ''
+      }, 500)
     }
 
     return {
       handleAnswer,
-      correctAnswerBorder,
-      falseAnswerBorder
+      correctAnswerText,
+      falseAnswerText
     }
   }
 })
